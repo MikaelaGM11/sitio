@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 
 const CATALOG = [
-  { id: 1, name: "Noir Élégance", category: "Masculino", notes: "Cedro · Ámbar · Vetiver", price: "Bs. 280", family: "amaderado" },
-  { id: 2, name: "Rosa Aurum", category: "Femenino", notes: "Rosa · Jazmín · Vainilla", price: "Bs. 310", family: "floral oriental" },
-  { id: 3, name: "Brisa Marina", category: "Unisex", notes: "Sal Marina · Bergamota · Musgo", price: "Bs. 260", family: "acuático" },
-  { id: 4, name: "Oud Royale", category: "Masculino", notes: "Oud · Pachulí · Incienso", price: "Bs. 420", family: "oriental" },
-  { id: 5, name: "Fleur Blanc", category: "Femenino", notes: "Azahar · Nardo · Almizcle", price: "Bs. 290", family: "floral" },
-  { id: 6, name: "Terra Mystica", category: "Unisex", notes: "Tierra · Sándalo · Tabaco", price: "Bs. 350", family: "terroso" },
+    { id: 1, name: "Noir Élégance", category: "Masculino", notes: "Cedro · Ámbar · Vetiver", price: "Bs. 280", family: "amaderado" },
+    { id: 2, name: "Rosa Aurum", category: "Femenino", notes: "Rosa · Jazmín · Vainilla", price: "Bs. 310", family: "floral oriental" },
+    { id: 3, name: "Brisa Marina", category: "Unisex", notes: "Sal Marina · Bergamota · Musgo", price: "Bs. 260", family: "acuático" },
+    { id: 4, name: "Oud Royale", category: "Masculino", notes: "Oud · Pachulí · Incienso", price: "Bs. 420", family: "oriental" },
+    { id: 5, name: "Fleur Blanc", category: "Femenino", notes: "Azahar · Nardo · Almizcle", price: "Bs. 290", family: "floral" },
+    { id: 6, name: "Terra Mystica", category: "Unisex", notes: "Tierra · Sándalo · Tabaco", price: "Bs. 350", family: "terroso" },
 ];
 
 const SYSTEM_PROMPT = `Eres el asistente virtual de Pipe Fernández Perfumería Artesanal, una perfumería de lujo en La Paz, Bolivia. Tu nombre es Aura.
@@ -32,89 +32,93 @@ RESTRICCIONES:
 Responde siempre en español. Sé específica y útil.`;
 
 const QUICK_ACTIONS = [
-  { icon: "🌹", text: "Familias olfativas" },
-  { icon: "🎁", text: "Recomendar regalo" },
-  { icon: "⚗️", text: "Usar el laboratorio" },
-  { icon: "💧", text: "Duración e intensidad" },
+    { icon: "🌹", text: "Familias olfativas" },
+    { icon: "🎁", text: "Recomendar regalo" },
+    { icon: "⚗️", text: "Usar el laboratorio" },
+    { icon: "💧", text: "Duración e intensidad" },
 ];
 
 export default function ChatbotAsistente() {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "Bienvenido a Pipe Fernández Perfumería. Soy *Aura*, tu asistente olfativa. ¿Buscas una fragancia para ti, un regalo especial, o quieres explorar el Laboratorio Virtual?",
-    },
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [dots, setDots] = useState("");
-  const messagesEndRef = useRef(null);
-  const inputRef = useRef(null);
+    const [open, setOpen] = useState(false);
+    const [messages, setMessages] = useState([
+        {
+            role: "assistant",
+            content: "Bienvenido a Pipe Fernández Perfumería. Soy *Aura*, tu asistente olfativa. ¿Buscas una fragancia para ti, un regalo especial, o quieres explorar el Laboratorio Virtual?",
+        },
+    ]);
+    const [input, setInput] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [dots, setDots] = useState("");
+    const messagesEndRef = useRef(null);
+    const inputRef = useRef(null);
 
-  useEffect(() => {
-    if (open && inputRef.current) inputRef.current.focus();
-  }, [open]);
+    useEffect(() => {
+        if (open && inputRef.current) inputRef.current.focus();
+    }, [open]);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages, loading]);
 
-  useEffect(() => {
-    if (!loading) return;
-    const interval = setInterval(() => setDots(d => d.length >= 3 ? "" : d + "."), 400);
-    return () => clearInterval(interval);
-  }, [loading]);
+    useEffect(() => {
+        if (!loading) return;
+        const interval = setInterval(() => setDots(d => d.length >= 3 ? "" : d + "."), 400);
+        return () => clearInterval(interval);
+    }, [loading]);
 
-  const sendMessage = async (text) => {
-    const userText = text || input.trim();
-    if (!userText || loading) return;
-    setInput("");
+    const sendMessage = async (text) => {
+        const userText = text || input.trim();
+        if (!userText || loading) return;
+        setInput("");
 
-    const newMessages = [...messages, { role: "user", content: userText }];
-    setMessages(newMessages);
-    setLoading(true);
+        const newMessages = [...messages, { role: "user", content: userText }];
+        setMessages(newMessages);
+        setLoading(true);
 
-    // Construir historial para GROQ (sin el primer mensaje de bienvenida en el system)
-    const history = newMessages.map(m => ({ role: m.role, content: m.content }));
+        // Construir historial con system prompt como primer mensaje
+        const history = [
+            { role: "user", content: SYSTEM_PROMPT },        // ← inyectar como primer user
+            { role: "assistant", content: "Entendido. Soy Aura, la asistente olfativa de Pipe Fernández. Estoy aquí para ayudarte." },
+            ...newMessages,
+        ];
 
-    try {
-      const response = await fetch("/.netlify/functions/groq", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: JSON.stringify({
-            system: SYSTEM_PROMPT,
-            messages: history,
-          }),
-          mode: "chatbot",
-        }),
-      });
+        try {
+            const response = await fetch("/.netlify/functions/groq", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    messages: history,   // ← enviar messages directamente, no dentro de prompt
+                }),
+            });
 
-      const data = await response.json();
-      const reply = data.choices?.[0]?.message?.content || "Lo siento, no pude procesar tu consulta. ¿Puedes intentarlo de nuevo?";
+            const data = await response.json();
+            const reply = data.choices?.[0]?.message?.content
+                || "Lo siento, no pude procesar tu consulta. ¿Puedes intentarlo de nuevo?";
 
-      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
-    } catch (err) {
-      setMessages(prev => [...prev, { role: "assistant", content: "Hubo un problema de conexión. Por favor intenta nuevamente." }]);
-    } finally {
-      setLoading(false);
-    }
-  };
+            setMessages(prev => [...prev, { role: "assistant", content: reply }]);
+        } catch (err) {
+            console.error("Error chatbot:", err);
+            setMessages(prev => [...prev, {
+                role: "assistant",
+                content: "Hubo un problema de conexión. Por favor intenta nuevamente."
+            }]);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const handleKey = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    };
 
-  const handleKey = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
-  };
+    const formatMsg = (text) =>
+        text.replace(/\*(.*?)\*/g, "<em>$1</em>").replace(/\n/g, "<br/>");
 
-  const formatMsg = (text) =>
-    text.replace(/\*(.*?)\*/g, "<em>$1</em>").replace(/\n/g, "<br/>");
-
-  return (
-    <>
-      <style>{`
+    return (
+        <>
+            <style>{`
         .chat-bubble-btn {
           position: fixed; bottom: 32px; right: 32px; z-index: 9990;
           width: 60px; height: 60px; border-radius: 50%;
@@ -253,108 +257,108 @@ export default function ChatbotAsistente() {
         @keyframes badgePop { from { transform:scale(0); } to { transform:scale(1); } }
       `}</style>
 
-      {/* Botón flotante */}
-      <button
-        className={`chat-bubble-btn ${open ? "open" : ""}`}
-        onClick={() => setOpen(o => !o)}
-        title="Asistente Olfativo"
-        style={{ position: "fixed" }}
-      >
-        {open ? "✕" : "💬"}
-        {!open && messages.length === 1 && (
-          <div className="chat-badge">1</div>
-        )}
-      </button>
+            {/* Botón flotante */}
+            <button
+                className={`chat-bubble-btn ${open ? "open" : ""}`}
+                onClick={() => setOpen(o => !o)}
+                title="Asistente Olfativo"
+                style={{ position: "fixed" }}
+            >
+                {open ? "✕" : "💬"}
+                {!open && messages.length === 1 && (
+                    <div className="chat-badge">1</div>
+                )}
+            </button>
 
-      {/* Panel de chat */}
-      <div className={`chat-panel ${open ? "opened" : "closed"}`}>
-        {/* Header */}
-        <div className="chat-header">
-          <div className="chat-avatar">✨</div>
-          <div style={{ flex: 1 }}>
-            <div style={{
-              fontFamily: "Cormorant Garamond, Georgia, serif",
-              fontSize: 16, fontStyle: "italic", color: "#f0e8d6",
-              display: "flex", alignItems: "center", gap: 6
-            }}>
-              Aura <span className="online-dot" />
-            </div>
-            <div style={{
-              fontFamily: "Montserrat, sans-serif", fontSize: 9,
-              letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase", marginTop: 2
-            }}>
-              Asistente Olfativa · Pipe Fernández
-            </div>
-          </div>
-          <button
-            onClick={() => setOpen(false)}
-            style={{ background: "none", border: "none", color: "#4a3c2a", cursor: "pointer", fontSize: 18, lineHeight: 1 }}
-          >
-            ×
-          </button>
-        </div>
-
-        {/* Mensajes */}
-        <div className="chat-messages">
-          {messages.map((msg, i) => (
-            <div key={i} className={`msg ${msg.role}`}>
-              {msg.role === "assistant" && (
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#1a1208", border: "1px solid #2a2010", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, flexShrink: 0 }}>✨</div>
-              )}
-              <div
-                className="msg-bubble"
-                dangerouslySetInnerHTML={{ __html: formatMsg(msg.content) }}
-              />
-            </div>
-          ))}
-
-          {loading && (
-            <div className="msg assistant">
-              <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#1a1208", border: "1px solid #2a2010", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, flexShrink: 0 }}>✨</div>
-              <div className="typing-indicator">
-                <div className="typing-dots">
-                  <div className="typing-dot" />
-                  <div className="typing-dot" />
-                  <div className="typing-dot" />
+            {/* Panel de chat */}
+            <div className={`chat-panel ${open ? "opened" : "closed"}`}>
+                {/* Header */}
+                <div className="chat-header">
+                    <div className="chat-avatar">✨</div>
+                    <div style={{ flex: 1 }}>
+                        <div style={{
+                            fontFamily: "Cormorant Garamond, Georgia, serif",
+                            fontSize: 16, fontStyle: "italic", color: "#f0e8d6",
+                            display: "flex", alignItems: "center", gap: 6
+                        }}>
+                            Aura <span className="online-dot" />
+                        </div>
+                        <div style={{
+                            fontFamily: "Montserrat, sans-serif", fontSize: 9,
+                            letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase", marginTop: 2
+                        }}>
+                            Asistente Olfativa · Pipe Fernández
+                        </div>
+                    </div>
+                    <button
+                        onClick={() => setOpen(false)}
+                        style={{ background: "none", border: "none", color: "#4a3c2a", cursor: "pointer", fontSize: 18, lineHeight: 1 }}
+                    >
+                        ×
+                    </button>
                 </div>
-                escribiendo
-              </div>
+
+                {/* Mensajes */}
+                <div className="chat-messages">
+                    {messages.map((msg, i) => (
+                        <div key={i} className={`msg ${msg.role}`}>
+                            {msg.role === "assistant" && (
+                                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#1a1208", border: "1px solid #2a2010", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, flexShrink: 0 }}>✨</div>
+                            )}
+                            <div
+                                className="msg-bubble"
+                                dangerouslySetInnerHTML={{ __html: formatMsg(msg.content) }}
+                            />
+                        </div>
+                    ))}
+
+                    {loading && (
+                        <div className="msg assistant">
+                            <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#1a1208", border: "1px solid #2a2010", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, flexShrink: 0 }}>✨</div>
+                            <div className="typing-indicator">
+                                <div className="typing-dots">
+                                    <div className="typing-dot" />
+                                    <div className="typing-dot" />
+                                    <div className="typing-dot" />
+                                </div>
+                                escribiendo
+                            </div>
+                        </div>
+                    )}
+                    <div ref={messagesEndRef} />
+                </div>
+
+                {/* Acciones rápidas (solo si pocas mensajes) */}
+                {messages.length <= 2 && (
+                    <div className="quick-actions">
+                        {QUICK_ACTIONS.map((qa, i) => (
+                            <button key={i} className="qa-btn" onClick={() => sendMessage(qa.text)}>
+                                {qa.icon} {qa.text}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* Input */}
+                <div className="chat-input-row">
+                    <textarea
+                        ref={inputRef}
+                        className="chat-input"
+                        placeholder="Escribe tu consulta..."
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        onKeyDown={handleKey}
+                        rows={1}
+                    />
+                    <button
+                        className="send-btn"
+                        onClick={() => sendMessage()}
+                        disabled={loading || !input.trim()}
+                    >
+                        →
+                    </button>
+                </div>
             </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Acciones rápidas (solo si pocas mensajes) */}
-        {messages.length <= 2 && (
-          <div className="quick-actions">
-            {QUICK_ACTIONS.map((qa, i) => (
-              <button key={i} className="qa-btn" onClick={() => sendMessage(qa.text)}>
-                {qa.icon} {qa.text}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Input */}
-        <div className="chat-input-row">
-          <textarea
-            ref={inputRef}
-            className="chat-input"
-            placeholder="Escribe tu consulta..."
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={handleKey}
-            rows={1}
-          />
-          <button
-            className="send-btn"
-            onClick={() => sendMessage()}
-            disabled={loading || !input.trim()}
-          >
-            →
-          </button>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
