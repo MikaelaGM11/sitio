@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import LaboratorioVirtual from "./LaboratorioVirtual";
+import ChatbotAsistente from "./ChatbotAsistente";
+import RecomendadorInteligente from "./RecomendadorInteligente";
 
 const NAV_LINKS = ["Inicio", "Catálogo", "Personalizado", "Sobre Nosotros", "Contacto"];
 
@@ -447,6 +449,7 @@ export default function PipeFernandezPerfumeria() {
       </section>
 
       <LaboratorioVirtual />
+      <RecomendadorInteligente onScrollTo={scrollToSection} />
       {/* CONTACTO */}
       <section id="Contacto" style={{ padding: "110px 60px", background: "#080604" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -545,6 +548,7 @@ export default function PipeFernandezPerfumeria() {
           © {new Date().getFullYear()} Pipe Fernández Perfumería · Todos los derechos reservados
         </div>
       </footer>
+       <ChatbotAsistente />
     </div>
   );
 }
