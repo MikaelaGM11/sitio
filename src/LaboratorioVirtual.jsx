@@ -271,7 +271,7 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "openai/gpt-3.5-turbo-0613",
+      model: "openai/gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.85,
       max_tokens: 900,
