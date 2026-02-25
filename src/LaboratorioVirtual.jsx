@@ -275,7 +275,7 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
     }),
   });
 
-  const data = await res.json();
+  const data = await response.json();
   const texto = data.choices?.[0]?.message?.content?.trim() || "";
 
   // Extraer JSON robusto aunque venga con texto extra
