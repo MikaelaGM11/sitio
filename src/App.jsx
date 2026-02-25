@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LaboratorioVirtual from "./LaboratorioVirtual";
 
 const NAV_LINKS = ["Inicio", "Catálogo", "Personalizado", "Sobre Nosotros", "Contacto"];
 
@@ -445,6 +446,7 @@ export default function PipeFernandezPerfumeria() {
         </div>
       </section>
 
+      <LaboratorioVirtual />
       {/* CONTACTO */}
       <section id="Contacto" style={{ padding: "110px 60px", background: "#080604" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
