@@ -264,21 +264,18 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
   "ingredientesComplementarios": ["ingrediente1", "ingrediente2", "ingrediente3"]
 }`;
 
-  const res = await fetch(API_URL, {
+  const response = await fetch("/.netlify/functions/chat", {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-3.5-turbo-0613",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.85,
       max_tokens: 900,
     }),
   });
-
-  if (!res.ok) throw new Error(`Error ${res.status}`);
 
   const data = await res.json();
   const texto = data.choices?.[0]?.message?.content?.trim() || "";
