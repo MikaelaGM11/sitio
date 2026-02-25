@@ -235,8 +235,6 @@ const OPCIONES = {
 // ─────────────────────────────────────────────
 // LLAMADA A IA — OpenRouter
 // ─────────────────────────────────────────────
-const API_KEY = import.meta.env.VITE_GROQ_API_KEY;
-const API_URL = import.meta.env.VITE_GROQ_API_URL;
 
 async function consultarIA({ notaSalida, notaCorazon, notaFondo, ocasion, personalidad }, deseoLibre) {
   const prompt = `Eres el maestro perfumista de "Pipe Fernández Perfumería", una perfumería artesanal de lujo en La Paz, Bolivia. Tu misión es crear una fragancia única y poética basada en las preferencias del cliente.
@@ -266,22 +264,13 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
 
   const API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
-  const res = await fetch(
-    "https://api.groq.com/openai/v1/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [{ role: "user", content: prompt }],
-        temperature: 0.85,
-        max_tokens: 900,
-      }),
-    }
-  );
+  const res = await fetch("/.netlify/functions/groq", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ prompt }),
+  });
 
   if (!res.ok) throw new Error(`Error ${res.status}`);
 
