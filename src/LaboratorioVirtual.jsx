@@ -235,8 +235,6 @@ const OPCIONES = {
 // ─────────────────────────────────────────────
 // LLAMADA A IA — OpenRouter
 // ─────────────────────────────────────────────
-const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
-const API_URL = import.meta.env.VITE_OPENROUTER_API_URL;
 
 async function consultarIA({ notaSalida, notaCorazon, notaFondo, ocasion, personalidad }, deseoLibre) {
   const prompt = `Eres el maestro perfumista de "Pipe Fernández Perfumería", una perfumería artesanal de lujo en La Paz, Bolivia. Tu misión es crear una fragancia única y poética basada en las preferencias del cliente.
@@ -311,7 +309,6 @@ function OpcionGroup({ campo, opciones, valor, onChange }) {
 // COMPONENTE PRINCIPAL
 // ─────────────────────────────────────────────
 export default function LaboratorioVirtual() {
-  console.log(import.meta.env.VITE_OPENROUTER_API_KEY) //
   const [sel, setSel] = useState({
     notaSalida: "", notaCorazon: "", notaFondo: "", ocasion: "", personalidad: "",
   });
