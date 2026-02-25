@@ -235,6 +235,8 @@ const OPCIONES = {
 // ─────────────────────────────────────────────
 // LLAMADA A IA — OpenRouter
 // ─────────────────────────────────────────────
+const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
+const API_URL = import.meta.env.VITE_OPENROUTER_API_URL;
 
 async function consultarIA({ notaSalida, notaCorazon, notaFondo, ocasion, personalidad }, deseoLibre) {
   const prompt = `Eres el maestro perfumista de "Pipe Fernández Perfumería", una perfumería artesanal de lujo en La Paz, Bolivia. Tu misión es crear una fragancia única y poética basada en las preferencias del cliente.
@@ -262,20 +264,23 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
   "ingredientesComplementarios": ["ingrediente1", "ingrediente2", "ingrediente3"]
 }`;
 
-  const response = await fetch("/.netlify/functions/chat", {
+  const res = await fetch(API_URL, {
     method: "POST",
     headers: {
+      "Authorization": `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "openai/gpt-3.5-turbo-0613",
+      model: "openai/gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.85,
       max_tokens: 900,
     }),
   });
 
-  const data = await response.json();
+  if (!res.ok) throw new Error(`Error ${res.status}`);
+
+  const data = await res.json();
   const texto = data.choices?.[0]?.message?.content?.trim() || "";
 
   // Extraer JSON robusto aunque venga con texto extra
@@ -309,6 +314,7 @@ function OpcionGroup({ campo, opciones, valor, onChange }) {
 // COMPONENTE PRINCIPAL
 // ─────────────────────────────────────────────
 export default function LaboratorioVirtual() {
+  console.log(import.meta.env.VITE_OPENROUTER_API_KEY) //
   const [sel, setSel] = useState({
     notaSalida: "", notaCorazon: "", notaFondo: "", ocasion: "", personalidad: "",
   });
