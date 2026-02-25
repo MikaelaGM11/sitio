@@ -314,7 +314,6 @@ function OpcionGroup({ campo, opciones, valor, onChange }) {
 // COMPONENTE PRINCIPAL
 // ─────────────────────────────────────────────
 export default function LaboratorioVirtual() {
-  console.log(import.meta.env.VITE_OPENROUTER_API_KEY) //
   const [sel, setSel] = useState({
     notaSalida: "", notaCorazon: "", notaFondo: "", ocasion: "", personalidad: "",
   });
