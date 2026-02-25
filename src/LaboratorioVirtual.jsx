@@ -273,7 +273,7 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
       "X-Title": "Pipe Fernández Perfumería",
     },
     body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct",
+      model: "openai/gpt-3.5-turbo-0613",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.85,
       max_tokens: 900,
@@ -316,6 +316,7 @@ function OpcionGroup({ campo, opciones, valor, onChange }) {
 // COMPONENTE PRINCIPAL
 // ─────────────────────────────────────────────
 export default function LaboratorioVirtual() {
+  console.log(import.meta.env.VITE_OPENROUTER_API_KEY) //
   const [sel, setSel] = useState({
     notaSalida: "", notaCorazon: "", notaFondo: "", ocasion: "", personalidad: "",
   });
