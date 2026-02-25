@@ -143,7 +143,7 @@ export default function RecomendadorInteligente({ onScrollTo }) {
   const currentQ = QUESTIONS[step - 1];
 
   return (
-    <section id="Recomendador" style={{ padding: "110px 60px", background: "#06050300" }}>
+    <section id="Recomendador" style={{ padding: "110px 60px", background: "#e7e7e500" }}>
       <style>{`
         .rec-container { max-width: 860px; margin: 0 auto; }
         .rec-option {

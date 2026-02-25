@@ -3,7 +3,8 @@ import LaboratorioVirtual from "./LaboratorioVirtual";
 import ChatbotAsistente from "./ChatbotAsistente";
 import RecomendadorInteligente from "./RecomendadorInteligente";
 
-const NAV_LINKS = ["Inicio", "Catálogo", "Personalizado", "Sobre Nosotros", "Contacto"];
+// Cambiar NAV_LINKS para incluir el recomendador:
+const NAV_LINKS = ["Inicio", "Catálogo", "Sobre Nosotros",  "Laboratorio", "Recomendador", "Contacto"];
 
 const CATALOG = [
   {
@@ -120,14 +121,14 @@ export default function PipeFernandezPerfumeria() {
         }
         .nav-link:hover, .nav-link.active { color: #c9a84c; }
         .btn-gold {
-          font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 500;
+          font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500;
           letter-spacing: 3px; text-transform: uppercase;
           background: transparent; border: 1px solid #c9a84c;
           color: #c9a84c; padding: 14px 32px; cursor: pointer; transition: all 0.3s;
         }
         .btn-gold:hover { background: #c9a84c; color: #0a0804; }
         .btn-fill {
-          font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 500;
+          font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500;
           letter-spacing: 3px; text-transform: uppercase;
           background: #c9a84c; border: 1px solid #c9a84c;
           color: #0a0804; padding: 14px 32px; cursor: pointer; transition: all 0.3s;
@@ -141,10 +142,10 @@ export default function PipeFernandezPerfumeria() {
         .card:hover .cimg { transform: scale(1.07); }
         .cimg { transition: transform 0.6s ease; width: 100%; height: 220px; object-fit: cover; display: block; }
         .filter-btn {
-          font-family: 'Montserrat', sans-serif; font-size: 10px;
+          font-family: 'Montserrat', sans-serif; font-size: 13px;
           letter-spacing: 2px; text-transform: uppercase;
           background: transparent; border: 1px solid #2a2010;
-          color: #c9b99a; padding: 10px 24px; cursor: pointer; transition: all 0.3s;
+          color: #c9b99a; padding: 13px 24px; cursor: pointer; transition: all 0.3s;
         }
         .filter-btn:hover, .filter-btn.active { border-color: #c9a84c; color: #c9a84c; }
         .ifield {
@@ -261,7 +262,7 @@ export default function PipeFernandezPerfumeria() {
       {/* CATÁLOGO */}
       <section id="Catálogo" style={{ padding: "110px 60px" }}>
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <div className="sans" style={{ fontSize: 10, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Nuestras Creaciones</div>
+          <div className="sans" style={{ fontSize: 13, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Nuestras Creaciones</div>
           <h2 className="pfp" style={{ fontSize: 54, fontWeight: 300, fontStyle: "italic", marginBottom: 20 }}>Colección</h2>
           <div className="divider" style={{ marginBottom: 20 }} />
           <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", maxWidth: 460, margin: "0 auto" }}>
@@ -281,16 +282,16 @@ export default function PipeFernandezPerfumeria() {
               <div style={{ overflow: "hidden", position: "relative" }}>
                 <img className="cimg" src={product.img} alt={product.name} onError={e => { e.target.style.display = "none"; }} />
                 <div style={{ position: "absolute", top: 14, right: 14, background: "rgba(10,8,4,0.8)", border: "1px solid #2a2010", padding: "4px 12px" }}>
-                  <span className="sans" style={{ fontSize: 8, letterSpacing: 2, color: "#c9a84c", textTransform: "uppercase" }}>{product.category}</span>
+                  <span className="sans" style={{ fontSize: 11, letterSpacing: 2, color: "#c9a84c", textTransform: "uppercase" }}>{product.category}</span>
                 </div>
               </div>
               <div style={{ padding: "26px 26px 30px" }}>
                 <h3 className="pfp" style={{ fontSize: 26, fontWeight: 300, fontStyle: "italic", marginBottom: 8 }}>{product.name}</h3>
-                <div className="sans" style={{ fontSize: 9, color: "#4a3c2a", letterSpacing: 2, marginBottom: 12 }}>{product.notes}</div>
+                <div className="sans" style={{ fontSize: 12, color: "#4a3c2a", letterSpacing: 2, marginBottom: 12 }}>{product.notes}</div>
                 <p className="sans" style={{ fontSize: 12, color: "#5a4a2a", lineHeight: 1.8, marginBottom: 22 }}>{product.desc}</p>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <span className="pfp gold" style={{ fontSize: 22, fontStyle: "italic" }}>{product.price}</span>
-                  <span className="sans" style={{ fontSize: 9, letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase" }}>Ver más →</span>
+                  <span className="sans" style={{ fontSize: 12, letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase" }}>Ver más →</span>
                 </div>
               </div>
             </div>
@@ -305,9 +306,9 @@ export default function PipeFernandezPerfumeria() {
             <img src={selectedProduct.img} alt={selectedProduct.name} style={{ width: "100%", height: 260, objectFit: "cover", display: "block" }} onError={e => e.target.style.display = "none"} />
             <button onClick={() => setSelectedProduct(null)} style={{ position: "absolute", top: 14, right: 20, background: "none", border: "none", color: "#c9a84c", fontSize: 30, cursor: "pointer" }}>×</button>
             <div style={{ padding: "38px 40px" }}>
-              <div className="sans" style={{ fontSize: 8, letterSpacing: 3, color: "#c9a84c", textTransform: "uppercase", marginBottom: 10 }}>{selectedProduct.category}</div>
+              <div className="sans" style={{ fontSize: 12, letterSpacing: 3, color: "#c9a84c", textTransform: "uppercase", marginBottom: 10 }}>{selectedProduct.category}</div>
               <h3 className="pfp" style={{ fontSize: 36, fontStyle: "italic", marginBottom: 10 }}>{selectedProduct.name}</h3>
-              <div className="sans" style={{ fontSize: 9, color: "#4a3c2a", letterSpacing: 2, marginBottom: 18 }}>{selectedProduct.notes}</div>
+              <div className="sans" style={{ fontSize: 13, color: "#4a3c2a", letterSpacing: 2, marginBottom: 18 }}>{selectedProduct.notes}</div>
               <p className="sans" style={{ fontSize: 13, color: "#7a6a4a", lineHeight: 1.9, marginBottom: 30 }}>{selectedProduct.desc}</p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <span className="pfp gold" style={{ fontSize: 30, fontStyle: "italic" }}>{selectedProduct.price}</span>
@@ -327,7 +328,7 @@ export default function PipeFernandezPerfumeria() {
           onError={e => { e.target.parentElement.style.background = "#080604"; e.target.style.display = "none"; }}
         />
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 40px" }}>
-          <div className="sans" style={{ fontSize: 9, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 18 }}>Ingredientes de todo el mundo</div>
+          <div className="sans" style={{ fontSize: 11, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 18 }}>Ingredientes de todo el mundo</div>
           <h2 className="pfp" style={{ fontSize: 46, fontStyle: "italic", marginBottom: 20 }}>Naturaleza destilada en frasco</h2>
           <p className="sans" style={{ fontSize: 12, color: "#7a6a4a", maxWidth: 480 }}>
             Rosas de Bulgaria, oud de Arabia, cedro del Líbano, vainilla de Madagascar. Solo lo mejor para tu fragancia.
@@ -335,220 +336,172 @@ export default function PipeFernandezPerfumeria() {
         </div>
       </div>
 
-      {/* PERSONALIZADO */}
-      <section id="Personalizado" style={{ padding: "110px 60px", background: "#080604" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 72 }}>
-            <div className="sans" style={{ fontSize: 10, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Tu Identidad Olfativa</div>
-            <h2 className="pfp" style={{ fontSize: 54, fontWeight: 300, fontStyle: "italic", marginBottom: 20 }}>Perfume Personalizado</h2>
-            <div className="divider" style={{ marginBottom: 20 }} />
-            <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", maxWidth: 480, margin: "0 auto" }}>
-              Trabajamos juntos para crear una fragancia que sea únicamente tuya — un aroma que cuente tu historia.
-            </p>
-          </div>
-
-          <div style={{ display: "flex", gap: 2, marginBottom: 60, flexWrap: "wrap" }}>
-            {/* Workshop image */}
-            <div style={{ flex: "0 0 340px", minHeight: 400, position: "relative", overflow: "hidden" }}>
-              <img
-                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=700&q=80"
-                alt="Taller de perfumes"
-                style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.55) sepia(0.2)" }}
-                onError={e => { e.target.parentElement.style.background = "#100e08"; e.target.style.display = "none"; }}
-              />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 60%, rgba(8,6,4,0.9))" }} />
-              <div style={{ position: "absolute", bottom: 30, left: 28 }}>
-                <div className="pfp" style={{ fontSize: 18, fontStyle: "italic" }}>Artesanía pura</div>
-                <div className="sans" style={{ fontSize: 8, letterSpacing: 3, color: "#c9a84c", marginTop: 6, textTransform: "uppercase" }}>Desde 2014 · La Paz</div>
-              </div>
-            </div>
-            {/* Steps */}
-            <div className="st-grid" style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, minWidth: 300 }}>
-              {PROCESS_STEPS.map(step => (
-                <div key={step.num} style={{ background: "#100e08", border: "1px solid #1e1a0e", padding: "36px 32px", transition: "border-color 0.3s" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "#c9a84c"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#1e1a0e"}
-                >
-                  <div style={{ fontSize: 30, marginBottom: 14 }}>{step.icon}</div>
-                  <div className="pfp gold" style={{ fontSize: 14, letterSpacing: 2, marginBottom: 10, opacity: 0.45 }}>{step.num}</div>
-                  <h3 className="pfp" style={{ fontSize: 22, fontWeight: 300, marginBottom: 10 }}>{step.title}</h3>
-                  <p className="sans" style={{ fontSize: 11, color: "#5a4a2a", lineHeight: 1.8 }}>{step.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ textAlign: "center" }}>
-            <button className="btn-gold" onClick={() => scrollToSection("Contacto")}>Iniciar el Proceso</button>
+    {/* SOBRE NOSOTROS */ }
+    < section id = "Sobre Nosotros" style = {{ padding: "110px 60px" }
+}>
+  <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+    <div className="ab-row" style={{ display: "flex", gap: 72, alignItems: "center", marginBottom: 100 }}>
+      {/* Photo */}
+      <div style={{ flex: "0 0 400px", position: "relative" }}>
+        <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden" }}>
+          <img
+            src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=700&q=80"
+            alt="Pipe Fernández"
+            style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.7) sepia(0.15)" }}
+            onError={e => { e.target.parentElement.style.background = "#100e08"; e.target.style.display = "none"; }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,8,4,0.75) 0%, transparent 55%)" }} />
+          <div style={{ position: "absolute", bottom: 24, left: 24 }}>
+            <div className="pfp" style={{ fontSize: 20, fontStyle: "italic" }}>Pipe Fernández</div>
+            <div className="sans" style={{ fontSize: 11, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginTop: 6 }}>Master Perfumer · La Paz</div>
           </div>
         </div>
-      </section>
-
-      {/* SOBRE NOSOTROS */}
-      <section id="Sobre Nosotros" style={{ padding: "110px 60px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div className="ab-row" style={{ display: "flex", gap: 72, alignItems: "center", marginBottom: 100 }}>
-            {/* Photo */}
-            <div style={{ flex: "0 0 400px", position: "relative" }}>
-              <div style={{ width: "100%", aspectRatio: "3/4", overflow: "hidden" }}>
-                <img
-                  src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=700&q=80"
-                  alt="Pipe Fernández"
-                  style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.7) sepia(0.15)" }}
-                  onError={e => { e.target.parentElement.style.background = "#100e08"; e.target.style.display = "none"; }}
-                />
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,8,4,0.75) 0%, transparent 55%)" }} />
-                <div style={{ position: "absolute", bottom: 24, left: 24 }}>
-                  <div className="pfp" style={{ fontSize: 20, fontStyle: "italic" }}>Pipe Fernández</div>
-                  <div className="sans" style={{ fontSize: 8, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginTop: 6 }}>Master Perfumer · La Paz</div>
-                </div>
-              </div>
-              <div style={{ position: "absolute", top: -8, left: -8, width: 44, height: 44, borderTop: "2px solid #c9a84c", borderLeft: "2px solid #c9a84c" }} />
-              <div style={{ position: "absolute", bottom: -8, right: -8, width: 44, height: 44, borderBottom: "2px solid #c9a84c", borderRight: "2px solid #c9a84c" }} />
+        <div style={{ position: "absolute", top: -8, left: -8, width: 44, height: 44, borderTop: "2px solid #c9a84c", borderLeft: "2px solid #c9a84c" }} />
+        <div style={{ position: "absolute", bottom: -8, right: -8, width: 44, height: 44, borderBottom: "2px solid #c9a84c", borderRight: "2px solid #c9a84c" }} />
+      </div>
+      {/* Text */}
+      <div style={{ flex: 1, minWidth: 280 }}>
+        <div className="sans" style={{ fontSize: 12, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Nuestra Historia</div>
+        <h2 className="pfp" style={{ fontSize: 46, fontWeight: 300, fontStyle: "italic", marginBottom: 28, lineHeight: 1.2 }}>Pasión convertida<br />en arte</h2>
+        <div style={{ width: 60, height: 1, background: "#c9a84c", marginBottom: 28 }} />
+        <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", lineHeight: 2, marginBottom: 20 }}>
+          Soy Pipe Fernández, perfumista artesanal con más de una década dedicada al arte de crear fragancias únicas en Bolivia. Mi camino comenzó con una fascinación profunda por los aromas del mundo natural y la capacidad de los perfumes para evocar emociones y memorias.
+        </p>
+        <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", lineHeight: 2, marginBottom: 36 }}>
+          Trabajo con materias primas de la más alta calidad provenientes de Francia, Medio Oriente y América Latina, combinando técnicas tradicionales con una visión contemporánea única.
+        </p>
+        <div style={{ display: "flex", gap: 48 }}>
+          {[{ num: "2014", label: "Fundación" }, { num: "100%", label: "Natural" }, { num: "La Paz", label: "Bolivia" }].map(s => (
+            <div key={s.label}>
+              <div className="pfp gold" style={{ fontSize: 28, fontStyle: "italic" }}>{s.num}</div>
+              <div className="sans" style={{ fontSize: 11, letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase", marginTop: 6 }}>{s.label}</div>
             </div>
-            {/* Text */}
-            <div style={{ flex: 1, minWidth: 280 }}>
-              <div className="sans" style={{ fontSize: 10, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Nuestra Historia</div>
-              <h2 className="pfp" style={{ fontSize: 46, fontWeight: 300, fontStyle: "italic", marginBottom: 28, lineHeight: 1.2 }}>Pasión convertida<br />en arte</h2>
-              <div style={{ width: 60, height: 1, background: "#c9a84c", marginBottom: 28 }} />
-              <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", lineHeight: 2, marginBottom: 20 }}>
-                Soy Pipe Fernández, perfumista artesanal con más de una década dedicada al arte de crear fragancias únicas en Bolivia. Mi camino comenzó con una fascinación profunda por los aromas del mundo natural y la capacidad de los perfumes para evocar emociones y memorias.
-              </p>
-              <p className="sans" style={{ fontSize: 13, color: "#5a4a2a", lineHeight: 2, marginBottom: 36 }}>
-                Trabajo con materias primas de la más alta calidad provenientes de Francia, Medio Oriente y América Latina, combinando técnicas tradicionales con una visión contemporánea única.
-              </p>
-              <div style={{ display: "flex", gap: 48 }}>
-                {[{ num: "2014", label: "Fundación" }, { num: "100%", label: "Natural" }, { num: "La Paz", label: "Bolivia" }].map(s => (
-                  <div key={s.label}>
-                    <div className="pfp gold" style={{ fontSize: 28, fontStyle: "italic" }}>{s.num}</div>
-                    <div className="sans" style={{ fontSize: 9, letterSpacing: 2, color: "#4a3c2a", textTransform: "uppercase", marginTop: 6 }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
+        </div>
+      </div>
+    </div>
 
-          {/* Testimonials */}
-          <div style={{ textAlign: "center", marginBottom: 52 }}>
-            <div className="sans" style={{ fontSize: 10, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 14 }}>Testimonios</div>
-            <h3 className="pfp" style={{ fontSize: 38, fontStyle: "italic" }}>Lo que dicen nuestros clientes</h3>
+    {/* Testimonials */}
+    <div style={{ textAlign: "center", marginBottom: 52 }}>
+      <div className="sans" style={{ fontSize: 13, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 14 }}>Testimonios</div>
+      <h3 className="pfp" style={{ fontSize: 38, fontStyle: "italic" }}>Lo que dicen nuestros clientes</h3>
+    </div>
+    <div className="te-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, maxWidth: 1000, margin: "0 auto" }}>
+      {TESTIMONIALS.map((t, i) => (
+        <div key={i} style={{ background: "#100e08", border: "1px solid #1e1a0e", padding: "34px" }}>
+          <div className="gold" style={{ fontSize: 38, lineHeight: 1, marginBottom: 14, fontFamily: "serif" }}>"</div>
+          <p className="sans" style={{ fontSize: 12, color: "#5a4a2a", lineHeight: 1.9, marginBottom: 24, fontStyle: "italic" }}>{t.text}</p>
+          <div style={{ borderTop: "1px solid #1e1a0e", paddingTop: 18 }}>
+            <div className="pfp" style={{ fontSize: 16 }}>{t.name}</div>
+            <div className="sans" style={{ fontSize: 1, color: "#4a3c2a", letterSpacing: 2, textTransform: "uppercase", marginTop: 4 }}>{t.city}</div>
           </div>
-          <div className="te-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2, maxWidth: 1000, margin: "0 auto" }}>
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} style={{ background: "#100e08", border: "1px solid #1e1a0e", padding: "34px" }}>
-                <div className="gold" style={{ fontSize: 38, lineHeight: 1, marginBottom: 14, fontFamily: "serif" }}>"</div>
-                <p className="sans" style={{ fontSize: 12, color: "#5a4a2a", lineHeight: 1.9, marginBottom: 24, fontStyle: "italic" }}>{t.text}</p>
-                <div style={{ borderTop: "1px solid #1e1a0e", paddingTop: 18 }}>
-                  <div className="pfp" style={{ fontSize: 16 }}>{t.name}</div>
-                  <div className="sans" style={{ fontSize: 9, color: "#4a3c2a", letterSpacing: 2, textTransform: "uppercase", marginTop: 4 }}>{t.city}</div>
-                </div>
-              </div>
+        </div>
+      ))}
+    </div>
+  </div>
+      </section >
+
+      <LaboratorioVirtual onScrollTo={scrollToSection}/>
+      <RecomendadorInteligente onScrollTo={scrollToSection} />
+{/* CONTACTO */ }
+<section id="Contacto" style={{ padding: "110px 60px", background: "#080604" }}>
+  <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+    <div style={{ textAlign: "center", marginBottom: 64 }}>
+      <div className="sans" style={{ fontSize: 13, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Hablemos</div>
+      <h2 className="pfp" style={{ fontSize: 54, fontWeight: 300, fontStyle: "italic", marginBottom: 20 }}>Contáctanos</h2>
+      <div className="divider" style={{ marginBottom: 20 }} />
+      <p className="sans" style={{ fontSize: 13, color: "#5a4a2a" }}>¿Preguntas o deseas crear tu fragancia personalizada? Estamos aquí.</p>
+    </div>
+
+    {/* Contact banner image */}
+    <div style={{ position: "relative", height: 200, overflow: "hidden", marginBottom: 64 }}>
+      <img
+        src="https://images.unsplash.com/photo-1594938298603-c8148c4b8af5?w=1200&q=80"
+        alt="Fragancias de lujo"
+        style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.2) sepia(0.2)" }}
+        onError={e => { e.target.parentElement.style.background = "#100e08"; e.target.style.display = "none"; }}
+      />
+      <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+        <div className="pfp" style={{ fontSize: 30, fontStyle: "italic" }}>Una fragancia para cada historia</div>
+        <div className="sans" style={{ fontSize: 11, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginTop: 12 }}>Pipe Fernández Perfumería · La Paz, Bolivia</div>
+      </div>
+    </div>
+
+    <div className="ct-row" style={{ display: "flex", gap: 80 }}>
+      {/* Info */}
+      <div style={{ flex: "0 0 240px" }}>
+        {[
+          { label: "Ubicación", val: "La Paz, Bolivia" },
+          { label: "WhatsApp", val: "+591 7X XXX XXXX" },
+          { label: "Email", val: "info@pipefernandez.com" },
+          { label: "Horario", val: "Lun – Sáb · 9:00–19:00" },
+        ].map(c => (
+          <div key={c.label} style={{ marginBottom: 32 }}>
+            <div className="sans" style={{ fontSize: 12, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginBottom: 8 }}>{c.label}</div>
+            <div className="pfp" style={{ fontSize: 16 }}>{c.val}</div>
+          </div>
+        ))}
+        <div>
+          <div className="sans" style={{ fontSize: 12, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginBottom: 12 }}>Síguenos</div>
+          <div style={{ display: "flex", gap: 16 }}>
+            {["Instagram", "Facebook", "TikTok"].map(s => (
+              <span key={s} className="sans" style={{ fontSize: 11, letterSpacing: 1, color: "#4a3c2a", textTransform: "uppercase", cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "#c9a84c"} onMouseLeave={e => e.target.style.color = "#4a3c2a"}
+              >{s}</span>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      <LaboratorioVirtual />
-      <RecomendadorInteligente onScrollTo={scrollToSection} />
-      {/* CONTACTO */}
-      <section id="Contacto" style={{ padding: "110px 60px", background: "#080604" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div className="sans" style={{ fontSize: 10, letterSpacing: 5, color: "#c9a84c", textTransform: "uppercase", marginBottom: 20 }}>Hablemos</div>
-            <h2 className="pfp" style={{ fontSize: 54, fontWeight: 300, fontStyle: "italic", marginBottom: 20 }}>Contáctanos</h2>
-            <div className="divider" style={{ marginBottom: 20 }} />
-            <p className="sans" style={{ fontSize: 13, color: "#5a4a2a" }}>¿Preguntas o deseas crear tu fragancia personalizada? Estamos aquí.</p>
+      {/* Form */}
+      <div style={{ flex: 1, minWidth: 260 }}>
+        {formSent ? (
+          <div style={{ textAlign: "center", padding: "60px 0" }}>
+            <div className="gold" style={{ fontSize: 56 }}>✓</div>
+            <h3 className="pfp" style={{ fontSize: 28, fontStyle: "italic", marginTop: 24, marginBottom: 12 }}>¡Mensaje enviado!</h3>
+            <p className="sans" style={{ fontSize: 12, color: "#5a4a2a" }}>Nos pondremos en contacto pronto.</p>
           </div>
-
-          {/* Contact banner image */}
-          <div style={{ position: "relative", height: 200, overflow: "hidden", marginBottom: 64 }}>
-            <img
-              src="https://images.unsplash.com/photo-1594938298603-c8148c4b8af5?w=1200&q=80"
-              alt="Fragancias de lujo"
-              style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.2) sepia(0.2)" }}
-              onError={e => { e.target.parentElement.style.background = "#100e08"; e.target.style.display = "none"; }}
-            />
-            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-              <div className="pfp" style={{ fontSize: 30, fontStyle: "italic" }}>Una fragancia para cada historia</div>
-              <div className="sans" style={{ fontSize: 9, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginTop: 12 }}>Pipe Fernández Perfumería · La Paz, Bolivia</div>
-            </div>
-          </div>
-
-          <div className="ct-row" style={{ display: "flex", gap: 80 }}>
-            {/* Info */}
-            <div style={{ flex: "0 0 240px" }}>
-              {[
-                { label: "Ubicación", val: "La Paz, Bolivia" },
-                { label: "WhatsApp", val: "+591 7X XXX XXXX" },
-                { label: "Email", val: "info@pipefernandez.com" },
-                { label: "Horario", val: "Lun – Sáb · 9:00–19:00" },
-              ].map(c => (
-                <div key={c.label} style={{ marginBottom: 32 }}>
-                  <div className="sans" style={{ fontSize: 8, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginBottom: 8 }}>{c.label}</div>
-                  <div className="pfp" style={{ fontSize: 16 }}>{c.val}</div>
-                </div>
-              ))}
-              <div>
-                <div className="sans" style={{ fontSize: 8, letterSpacing: 4, color: "#c9a84c", textTransform: "uppercase", marginBottom: 12 }}>Síguenos</div>
-                <div style={{ display: "flex", gap: 16 }}>
-                  {["Instagram", "Facebook", "TikTok"].map(s => (
-                    <span key={s} className="sans" style={{ fontSize: 9, letterSpacing: 1, color: "#4a3c2a", textTransform: "uppercase", cursor: "pointer", transition: "color 0.3s" }}
-                      onMouseEnter={e => e.target.style.color = "#c9a84c"} onMouseLeave={e => e.target.style.color = "#4a3c2a"}
-                    >{s}</span>
-                  ))}
-                </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 34 }}>
+            {[
+              { key: "nombre", label: "Nombre completo", placeholder: "Tu nombre", type: "text", req: true },
+              { key: "email", label: "Email", placeholder: "tu@email.com", type: "email", req: true },
+              { key: "telefono", label: "Teléfono / WhatsApp", placeholder: "+591 7X XXX XXXX", type: "text", req: false },
+            ].map(f => (
+              <div key={f.key}>
+                <label className="sans" style={{ fontSize: 11, letterSpacing: 3, color: "#4a3c2a", textTransform: "uppercase", display: "block", marginBottom: 8 }}>{f.label}</label>
+                <input className="ifield" type={f.type} placeholder={f.placeholder} required={f.req}
+                  value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} />
               </div>
+            ))}
+            <div>
+              <label className="sans" style={{ fontSize: 11, letterSpacing: 3, color: "#4a3c2a", textTransform: "uppercase", display: "block", marginBottom: 8 }}>Mensaje</label>
+              <textarea className="ifield" rows={4} required placeholder="Cuéntanos qué estás buscando..."
+                value={formData.mensaje} onChange={e => setFormData({ ...formData, mensaje: e.target.value })} />
             </div>
+            <button type="submit" className="btn-fill" style={{ padding: 18 }}>Enviar Mensaje</button>
+          </form>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
 
-            {/* Form */}
-            <div style={{ flex: 1, minWidth: 260 }}>
-              {formSent ? (
-                <div style={{ textAlign: "center", padding: "60px 0" }}>
-                  <div className="gold" style={{ fontSize: 56 }}>✓</div>
-                  <h3 className="pfp" style={{ fontSize: 28, fontStyle: "italic", marginTop: 24, marginBottom: 12 }}>¡Mensaje enviado!</h3>
-                  <p className="sans" style={{ fontSize: 12, color: "#5a4a2a" }}>Nos pondremos en contacto pronto.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 34 }}>
-                  {[
-                    { key: "nombre", label: "Nombre completo", placeholder: "Tu nombre", type: "text", req: true },
-                    { key: "email", label: "Email", placeholder: "tu@email.com", type: "email", req: true },
-                    { key: "telefono", label: "Teléfono / WhatsApp", placeholder: "+591 7X XXX XXXX", type: "text", req: false },
-                  ].map(f => (
-                    <div key={f.key}>
-                      <label className="sans" style={{ fontSize: 8, letterSpacing: 3, color: "#4a3c2a", textTransform: "uppercase", display: "block", marginBottom: 8 }}>{f.label}</label>
-                      <input className="ifield" type={f.type} placeholder={f.placeholder} required={f.req}
-                        value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} />
-                    </div>
-                  ))}
-                  <div>
-                    <label className="sans" style={{ fontSize: 8, letterSpacing: 3, color: "#4a3c2a", textTransform: "uppercase", display: "block", marginBottom: 8 }}>Mensaje</label>
-                    <textarea className="ifield" rows={4} required placeholder="Cuéntanos qué estás buscando..."
-                      value={formData.mensaje} onChange={e => setFormData({ ...formData, mensaje: e.target.value })} />
-                  </div>
-                  <button type="submit" className="btn-fill" style={{ padding: 18 }}>Enviar Mensaje</button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
+{/* FOOTER */ }
       <footer style={{ borderTop: "1px solid #1e1a0e", padding: "52px 60px 32px", textAlign: "center" }}>
         <div className="pfp gold" style={{ fontSize: 26, fontStyle: "italic", marginBottom: 6 }}>Pipe Fernández</div>
-        <div className="sans" style={{ fontSize: 8, letterSpacing: 5, color: "#2a2010", textTransform: "uppercase", marginBottom: 32 }}>Perfumería Artesanal · La Paz, Bolivia</div>
+        <div className="sans" style={{ fontSize: 11, letterSpacing: 5, color: "#2a2010", textTransform: "uppercase", marginBottom: 32 }}>Perfumería Artesanal · La Paz, Bolivia</div>
         <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", marginBottom: 32 }}>
           {NAV_LINKS.map(l => (
             <button key={l} className="nav-link" onClick={() => scrollToSection(l)} style={{ fontSize: 10 }}>{l}</button>
           ))}
         </div>
         <div style={{ width: "100%", height: 1, background: "#1e1a0e", marginBottom: 24 }} />
-        <div className="sans" style={{ fontSize: 10, color: "#2a2010", letterSpacing: 1 }}>
+        <div className="sans" style={{ fontSize: 12, color: "#2a2010", letterSpacing: 1 }}>
           © {new Date().getFullYear()} Pipe Fernández Perfumería · Todos los derechos reservados
         </div>
       </footer>
        <ChatbotAsistente />
-    </div>
+    </div >
   );
 }
