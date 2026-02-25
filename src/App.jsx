@@ -211,7 +211,7 @@ export default function PipeFernandezPerfumeria() {
         {/* Parallax bg */}
         <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
           <img
-            src="https://images.unsplash.com/photo-1547887538-047f4e8d5c61?w=1600&q=85"
+            src="https://mayence.es/wp-content/uploads/2023/04/Mayence-791-x-527-px-Blog-2.jpg"
             alt="Perfumería de lujo"
             style={{ width: "100%", height: "120%", objectFit: "cover", objectPosition: "center", filter: "brightness(0.18) sepia(0.3)", transform: `translateY(${scrollY * 0.25}px)` }}
           />
