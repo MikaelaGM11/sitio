@@ -206,36 +206,36 @@ const styles = `
 // OPCIONES DE SELECCIÓN
 // ─────────────────────────────────────────────
 const OPCIONES = {
-  notaSalida:   [
-    { val: "Cítrico",   emoji: "🍋" }, { val: "Bergamota", emoji: "🌿" },
-    { val: "Frutal",    emoji: "🍑" }, { val: "Verde",     emoji: "🌱" },
-    { val: "Marino",    emoji: "🌊" }, { val: "Especiado", emoji: "🌶️" },
+  notaSalida: [
+    { val: "Cítrico", emoji: "🍋" }, { val: "Bergamota", emoji: "🌿" },
+    { val: "Frutal", emoji: "🍑" }, { val: "Verde", emoji: "🌱" },
+    { val: "Marino", emoji: "🌊" }, { val: "Especiado", emoji: "🌶️" },
   ],
-  notaCorazon:  [
-    { val: "Rosa",      emoji: "🌹" }, { val: "Jazmín",    emoji: "🌸" },
-    { val: "Lirio",     emoji: "💐" }, { val: "Iris",      emoji: "🪻" },
-    { val: "Especias",  emoji: "🫚" }, { val: "Cuero",     emoji: "🟤" },
+  notaCorazon: [
+    { val: "Rosa", emoji: "🌹" }, { val: "Jazmín", emoji: "🌸" },
+    { val: "Lirio", emoji: "💐" }, { val: "Iris", emoji: "🪻" },
+    { val: "Especias", emoji: "🫚" }, { val: "Cuero", emoji: "🟤" },
   ],
-  notaFondo:    [
-    { val: "Oud",       emoji: "🪵" }, { val: "Ámbar",     emoji: "🟡" },
-    { val: "Vainilla",  emoji: "🍦" }, { val: "Musgo",     emoji: "🌾" },
-    { val: "Sándalo",   emoji: "🪨" }, { val: "Almizcle",  emoji: "☁️" },
+  notaFondo: [
+    { val: "Oud", emoji: "🪵" }, { val: "Ámbar", emoji: "🟡" },
+    { val: "Vainilla", emoji: "🍦" }, { val: "Musgo", emoji: "🌾" },
+    { val: "Sándalo", emoji: "🪨" }, { val: "Almizcle", emoji: "☁️" },
   ],
-  ocasion:      [
-    { val: "Uso Diario" },       { val: "Noche / Salida" },
-    { val: "Evento Formal" },    { val: "Romántico" },
+  ocasion: [
+    { val: "Uso Diario" }, { val: "Noche / Salida" },
+    { val: "Evento Formal" }, { val: "Romántico" },
     { val: "Ambiente Laboral" }, { val: "Verano / Playa" },
   ],
   personalidad: [
     { val: "Misterioso" }, { val: "Elegante" }, { val: "Romántico" },
-    { val: "Fresco" },     { val: "Audaz" },    { val: "Sereno" },
+    { val: "Fresco" }, { val: "Audaz" }, { val: "Sereno" },
   ],
 };
 
 // ─────────────────────────────────────────────
 // LLAMADA A IA — OpenRouter
 // ─────────────────────────────────────────────
-const API_KEY = "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";
+const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 async function consultarIA({ notaSalida, notaCorazon, notaFondo, ocasion, personalidad }, deseoLibre) {
@@ -320,18 +320,18 @@ export default function LaboratorioVirtual() {
     notaSalida: "", notaCorazon: "", notaFondo: "", ocasion: "", personalidad: "",
   });
   const [deseoLibre, setDeseoLibre] = useState("");
-  const [resultado,  setResultado]  = useState(null);
-  const [cargando,   setCargando]   = useState(false);
-  const [error,      setError]      = useState("");
-  const [paso,       setPaso]       = useState("");
+  const [resultado, setResultado] = useState(null);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState("");
+  const [paso, setPaso] = useState("");
 
-  const completo  = Object.values(sel).every(Boolean);
-  const selCount  = Object.values(sel).filter(Boolean).length;
+  const completo = Object.values(sel).every(Boolean);
+  const selCount = Object.values(sel).filter(Boolean).length;
 
   const handleSelect = (campo, val) => {
     setSel(p => ({ ...p, [campo]: val }));
     if (resultado) setResultado(null);
-    if (error)     setError("");
+    if (error) setError("");
   };
 
   const handleGenerar = async () => {
@@ -389,15 +389,15 @@ export default function LaboratorioVirtual() {
           <div className="lab-grid">
             <div className="lab-field">
               <span className="lab-label">🌅 Nota de Salida</span>
-              <OpcionGroup campo="notaSalida"   opciones={OPCIONES.notaSalida}   valor={sel.notaSalida}   onChange={handleSelect} />
+              <OpcionGroup campo="notaSalida" opciones={OPCIONES.notaSalida} valor={sel.notaSalida} onChange={handleSelect} />
             </div>
             <div className="lab-field">
               <span className="lab-label">💛 Nota de Corazón</span>
-              <OpcionGroup campo="notaCorazon"  opciones={OPCIONES.notaCorazon}  valor={sel.notaCorazon}  onChange={handleSelect} />
+              <OpcionGroup campo="notaCorazon" opciones={OPCIONES.notaCorazon} valor={sel.notaCorazon} onChange={handleSelect} />
             </div>
             <div className="lab-field">
               <span className="lab-label">🌙 Nota de Fondo</span>
-              <OpcionGroup campo="notaFondo"    opciones={OPCIONES.notaFondo}    valor={sel.notaFondo}    onChange={handleSelect} />
+              <OpcionGroup campo="notaFondo" opciones={OPCIONES.notaFondo} valor={sel.notaFondo} onChange={handleSelect} />
             </div>
             <div className="lab-field">
               <span className="lab-label">✦ Personalidad</span>
@@ -481,17 +481,17 @@ export default function LaboratorioVirtual() {
               {/* Metadatos */}
               <div className="lab-meta-grid">
                 {[
-                  { label: "Intensidad", val: resultado.intensidad,                     small: false },
-                  { label: "Estación",   val: resultado.estacion,                       small: false },
-                  { label: "Duración",   val: resultado.duracion,                       small: false },
-                  { label: "Frasco",     val: resultado.frasco,                         small: true  },
+                  { label: "Intensidad", val: resultado.intensidad, small: false },
+                  { label: "Estación", val: resultado.estacion, small: false },
+                  { label: "Duración", val: resultado.duracion, small: false },
+                  { label: "Frasco", val: resultado.frasco, small: true },
                 ].map(m => (
                   <div key={m.label} className="lab-meta-cell">
                     <span className="lab-meta-label">{m.label}</span>
                     <div className="lab-meta-val" style={{
-                      fontSize:    m.small ? 11 : 17,
-                      fontStyle:   m.small ? "normal" : "italic",
-                      fontFamily:  m.small ? "'Montserrat',sans-serif" : undefined,
+                      fontSize: m.small ? 11 : 17,
+                      fontStyle: m.small ? "normal" : "italic",
+                      fontFamily: m.small ? "'Montserrat',sans-serif" : undefined,
                     }}>
                       {m.val}
                     </div>
@@ -537,9 +537,9 @@ export default function LaboratorioVirtual() {
                   <span className="lab-section-title">🔺 Tu Pirámide Olfativa</span>
                 </div>
                 {[
-                  { tier: "↑ Salida",  val: sel.notaSalida  },
+                  { tier: "↑ Salida", val: sel.notaSalida },
                   { tier: "↑ Corazón", val: sel.notaCorazon },
-                  { tier: "↑ Fondo",   val: sel.notaFondo   },
+                  { tier: "↑ Fondo", val: sel.notaFondo },
                 ].map(n => (
                   <div key={n.tier}>
                     <div style={{ fontSize: 8, letterSpacing: 3, textTransform: "uppercase", color: "#4a3c2a", marginBottom: 6 }}>{n.tier}</div>
