@@ -264,19 +264,24 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
   "ingredientesComplementarios": ["ingrediente1", "ingrediente2", "ingrediente3"]
 }`;
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.85,
-      max_tokens: 900,
-    }),
-  });
+  const API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+
+  const res = await fetch(
+    "https://api.groq.com/openai/v1/chat/completions",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.85,
+        max_tokens: 900,
+      }),
+    }
+  );
 
   if (!res.ok) throw new Error(`Error ${res.status}`);
 
