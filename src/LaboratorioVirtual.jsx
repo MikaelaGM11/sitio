@@ -269,7 +269,7 @@ Responde SOLO con un JSON válido. Sin texto extra, sin markdown, sin bloques de
     headers: {
       "Authorization": `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://pipefernandezperfumeria.com",
+      "HTTP-Referer": "https://fastidious-kleicha-7f71f7.netlify.app/",
       "X-Title": "Pipe Fernández Perfumería",
     },
     body: JSON.stringify({
